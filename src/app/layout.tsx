@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { MSWComponent } from './_components/MSWComponent';
+import RQProvider from './_components/RQProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <MSWComponent />
-        <div className="w-full max-w-xl h-full min-h-screen flex justify-center mx-auto px-4 pt-32">
-          {children}
-        </div>
+        <RQProvider>
+          <div className="w-full max-w-xl h-full min-h-screen flex justify-center mx-auto px-4 pt-32">
+            {children}
+          </div>
+        </RQProvider>
       </body>
     </html>
   );
