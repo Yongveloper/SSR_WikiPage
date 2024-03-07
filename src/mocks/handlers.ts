@@ -2,7 +2,7 @@ import { IPost } from '@/model/Post';
 import { HttpResponse, StrictResponse, http } from 'msw';
 
 let posts: IPost[] = [];
-for (let i = 1; i <= 60; i++) {
+for (let i = 1; i <= 5; i++) {
   posts.push({
     id: i,
     title: `제목${i}`,
@@ -41,4 +41,39 @@ export const handlers = [
       { status: 404 },
     );
   }),
+
+  http.post('/api/posts', async ({ request }) => {
+    const data: any = await request.json();
+    const newPost = {
+      ...data,
+      id: posts.length + 1,
+      createdAt: new Date(),
+    };
+    posts = [newPost, ...posts];
+
+    return HttpResponse.json(newPost, { status: 201 });
+  }),
+
+  http.put(
+    '/api/posts/:id',
+    async ({ request, params }): Promise<StrictResponse<any>> => {
+      const { id } = params;
+      const post = posts.find((post) => post.id === Number(id));
+
+      const data: any = await request.json();
+      if (post) {
+        post.title = data.title;
+        post.content = data.content;
+
+        return HttpResponse.json(post, { status: 200 });
+      }
+
+      return HttpResponse.json(
+        {
+          message: 'Not Found',
+        },
+        { status: 404 },
+      );
+    },
+  ),
 ];
