@@ -11,7 +11,7 @@ function WikiListSection() {
   const searchParams = useSearchParams();
   const page = searchParams.get('page') || '1';
   const { data } = useQuery<IPostResponse>({
-    queryKey: ['posts', page],
+    queryKey: ['posts', 'page', page],
     queryFn: () => getPosts(page),
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,

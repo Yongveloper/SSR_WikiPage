@@ -3,7 +3,7 @@ export async function getPosts(page: string, size: string = '5') {
     `http://localhost:9090/api/posts?page=${page}?size=${size}`,
     {
       next: {
-        tags: ['posts', page],
+        tags: ['posts', 'page', page],
       },
       cache: 'no-store',
     },
