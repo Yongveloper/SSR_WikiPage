@@ -1,27 +1,16 @@
+'use client';
+
 import Link from 'next/link';
+import { IPost } from '@/model/Post';
 
-const data = [
-  {
-    title: '1번게시물',
-  },
-  {
-    title: '2번게시물',
-  },
-  {
-    title: '3번게시물',
-  },
-  {
-    title: '4번게시물',
-  },
-  {
-    title: '5번게시물',
-  },
-];
+interface IWikiListProps {
+  posts: IPost[] | undefined;
+}
 
-function WikiList() {
+function WikiList({ posts }: IWikiListProps) {
   return (
-    <ul>
-      {data.map((item, index) => (
+    <ul className="w-full h-52">
+      {posts?.map((item, index) => (
         <li
           key={index}
           className="mb-2 border border-gray-200 rounded-md px-2 py-1"
