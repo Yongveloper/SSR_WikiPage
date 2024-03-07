@@ -1,26 +1,28 @@
 'use client';
 
-import { getPost } from '@/app/wiki/[id]/_lib/getPost';
-import { IPost } from '@/model/Post';
-import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
+import DOMPurify from 'isomorphic-dompurify';
+import { useGetPostDetailQuery } from '@/hooks/useGetPostDetailQuery';
 
+// Todo: loading, error 처리
 function Contents() {
   const params = useParams();
   const { id } = params;
-  const { data } = useQuery<IPost>({
-    queryKey: ['post', 'detail', id],
-    queryFn: () => getPost(id as string),
-    staleTime: 60 * 1000,
-    gcTime: 300 * 1000,
-  });
+  const { data, isLoading, isError } = useGetPostDetailQuery(id as string);
 
   return (
     <article>
       <h1 className="text-3xl font-bold border-b border-gray-300 my-6">
         {data?.title}
       </h1>
-      <p>{data?.content}</p>
+      <div className="ql-snow">
+        <div
+          className="ql-editor"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(data?.content || ''),
+          }}
+        />
+      </div>
     </article>
   );
 }
