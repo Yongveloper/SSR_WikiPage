@@ -20,7 +20,9 @@ function WikiListSection() {
   return (
     <main className="flex flex-col items-center gap-6">
       <WikiList posts={data?.posts} />
-      <PageNation totalPages={Number(data?.totalPages) || 1} />
+      {data?.totalPages !== 1 && (
+        <PageNation totalPages={Number(data?.totalPages) || 1} />
+      )}
     </main>
   );
 }
