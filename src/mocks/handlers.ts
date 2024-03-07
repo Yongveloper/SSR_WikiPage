@@ -1,6 +1,7 @@
-import { HttpResponse, http } from 'msw';
+import { IPost } from '@/model/Post';
+import { HttpResponse, StrictResponse, http } from 'msw';
 
-let posts: any = [];
+let posts: IPost[] = [];
 for (let i = 1; i <= 60; i++) {
   posts.push({
     id: i,
@@ -24,5 +25,20 @@ export const handlers = [
       page,
       totalPages: Math.ceil(posts.length / perContent),
     });
+  }),
+
+  http.get('/api/posts/:id', ({ request, params }): StrictResponse<any> => {
+    const { id } = params;
+
+    const post = posts.find((post) => post.id === Number(id));
+    if (post) {
+      return HttpResponse.json(post);
+    }
+    return HttpResponse.json(
+      {
+        message: 'Not Found',
+      },
+      { status: 404 },
+    );
   }),
 ];
