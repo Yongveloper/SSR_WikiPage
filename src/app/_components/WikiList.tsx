@@ -15,7 +15,7 @@ function WikiList({ posts }: IWikiListProps) {
           key={index}
           className="mb-2 border border-gray-200 rounded-md px-2 py-1"
         >
-          <Link className="text-blue-500" href={`/wiki/${item.title}`}>
+          <Link className="text-blue-500" href={`/wiki/${item.id}`}>
             <h3 className="font-semibold text-blue-500">
               Q. <span className="text-gray-700">{item.title}</span>
             </h3>
