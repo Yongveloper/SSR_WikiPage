@@ -27,7 +27,7 @@ async function Wiki({ params }: IWikiProps) {
     <div className="w-full">
       <div className="flex justify-between">
         <BackButton />
-        <EditButton />
+        <EditButton id={id} />
       </div>
       <HydrationBoundary state={dehydratedState}>
         <Contents />
