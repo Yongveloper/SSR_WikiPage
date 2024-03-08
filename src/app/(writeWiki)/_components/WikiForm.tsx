@@ -8,6 +8,7 @@ import {
 import TextEditor from './TextEditor';
 import { useUpdatePostMutation } from '@/hooks/useUpdatePostMutation';
 import { useCreatePostMutation } from '@/hooks/useCreatePostMutation';
+import Button from '@/components/Button';
 
 interface IWikiFormProps {
   isEditMode?: boolean;
@@ -56,12 +57,9 @@ function WikiForm({
         className="text-2xl font-bold border-b border-gray-200 outline-0"
       />
       <TextEditor value={content} onChange={setContent} />
-      <button
-        type="submit"
-        className="mt-12 text-lg font-bold w-26 flex items-center justify-center px-4 py-2 text-blue-500 transition-colors duration-200 bg-white border rounded-lg gap-x-2 hover:bg-gray-100"
-      >
+      <Button type="submit" className="mt-12 text-lg font-bold">
         저장
-      </button>
+      </Button>
     </form>
   );
 }

@@ -1,12 +1,10 @@
+import Button from '@/components/Button';
 import Link from 'next/link';
 
 function BackButton() {
   return (
     <Link href="/">
-      <button
-        type="button"
-        className="w-26 flex items-center justify-center px-2 py-2 text-sm text-blue-500 transition-colors duration-200 bg-white border rounded-lg gap-x-2 hover:bg-gray-100"
-      >
+      <Button>
         <svg
           className="w-5 h-5 rtl:rotate-180"
           xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +20,7 @@ function BackButton() {
           />
         </svg>
         <span>뒤로가기</span>
-      </button>
+      </Button>
     </Link>
   );
 }

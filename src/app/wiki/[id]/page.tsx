@@ -4,10 +4,11 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 import BackButton from './_components/BackButton';
-import EditButton from './_components/EditButton';
 import { getPost } from '@/app/wiki/[id]/_lib/getPost';
 import { getTitles } from './_lib/getTitles';
 import Contents from './_components/Contents';
+import Link from 'next/link';
+import Button from '@/components/Button';
 
 interface IWikiProps {
   params: {
@@ -30,10 +31,12 @@ async function Wiki({ params }: IWikiProps) {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between">
+      <header className="flex justify-between">
         <BackButton />
-        <EditButton id={id} />
-      </div>
+        <Link href={`/edit/${id}`}>
+          <Button>수정</Button>
+        </Link>
+      </header>
       <HydrationBoundary state={dehydratedState}>
         <Contents />
       </HydrationBoundary>
