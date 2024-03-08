@@ -2,10 +2,10 @@
 
 import { useSearchParams } from 'next/navigation';
 import PageNation from './PageNation';
-import WikiList from './WikiList';
 import { useQuery } from '@tanstack/react-query';
 import { IPostResponse } from '@/model/Post';
 import { getPosts } from '../_lib/getPosts';
+import Wiki from './Wiki';
 
 function WikiListSection() {
   const searchParams = useSearchParams();
@@ -19,7 +19,9 @@ function WikiListSection() {
 
   return (
     <main className="flex flex-col items-center gap-6">
-      <WikiList posts={data?.posts} />
+      <ul className="w-full h-52">
+        {data?.posts.map((item) => <Wiki key={item.id} wiki={item} />)}
+      </ul>
       {data?.totalPages !== 1 && (
         <PageNation totalPages={Number(data?.totalPages) || 1} />
       )}
