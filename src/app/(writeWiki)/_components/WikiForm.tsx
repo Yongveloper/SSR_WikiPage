@@ -34,6 +34,10 @@ function WikiForm({
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
+    if (!title) return alert('제목을 입력해주세요.');
+    if (!content) return alert('내용을 입력해주세요.');
+
     if (isEditMode) {
       updatePostMutation.mutate({ title, content });
     } else {
