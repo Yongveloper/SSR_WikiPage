@@ -6,6 +6,7 @@ import {
 import BackButton from './_components/BackButton';
 import EditButton from './_components/EditButton';
 import { getPost } from '@/app/wiki/[id]/_lib/getPost';
+import { getTitles } from './_lib/getTitles';
 import Contents from './_components/Contents';
 
 interface IWikiProps {
@@ -20,6 +21,10 @@ async function Wiki({ params }: IWikiProps) {
   await queryClient.prefetchQuery({
     queryKey: ['post', 'detail', id],
     queryFn: () => getPost(id),
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ['posts', 'titles'],
+    queryFn: getTitles,
   });
   const dehydratedState = dehydrate(queryClient);
 
