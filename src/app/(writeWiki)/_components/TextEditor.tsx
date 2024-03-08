@@ -1,4 +1,5 @@
-import ReactQuill from 'react-quill';
+import dynamic from 'next/dynamic';
+import { useMemo } from 'react';
 
 const modules = {
   toolbar: [
@@ -38,6 +39,10 @@ interface ITextEditorProps {
 }
 
 function TextEditor({ value, onChange }: ITextEditorProps) {
+  const ReactQuill = useMemo(
+    () => dynamic(() => import('react-quill'), { ssr: false }),
+    [],
+  );
   return (
     <ReactQuill
       style={{ height: '480px' }}
