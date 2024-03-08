@@ -12,6 +12,12 @@ for (let i = 1; i <= 5; i++) {
 }
 
 export const handlers = [
+  http.get('/api/posts/titles', () => {
+    const titles = posts.map((post) => ({ id: post.id, title: post.title }));
+
+    return HttpResponse.json(titles, { status: 200 });
+  }),
+
   http.get('/api/posts', ({ request }) => {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get('page') as string) || 1;
@@ -60,20 +66,20 @@ export const handlers = [
       const { id } = params;
       const post = posts.find((post) => post.id === Number(id));
 
-      const data: any = await request.json();
-      if (post) {
-        post.title = data.title;
-        post.content = data.content;
-
-        return HttpResponse.json(post, { status: 200 });
+      if (!post) {
+        return HttpResponse.json(
+          {
+            message: 'Not Found',
+          },
+          { status: 404 },
+        );
       }
 
-      return HttpResponse.json(
-        {
-          message: 'Not Found',
-        },
-        { status: 404 },
-      );
+      const data: any = await request.json();
+      post.title = data.title;
+      post.content = data.content;
+
+      return HttpResponse.json(post, { status: 200 });
     },
   ),
 ];
