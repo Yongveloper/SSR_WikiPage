@@ -35,6 +35,7 @@
 - isomorphic-dompurify
 
   - 게시글 내용은 API를 통해 받아온 html 태그 형태 텍스트를 주입하여 보여주기 때문에 XSS 보안을 위해 해당 라이브러리 사용
+  - `dompurify`는 SSR을 지원하지 않는 문제로 `isomorphic-dompurify` 선택 [참고 링크](https://stackoverflow.com/questions/65646007/next-js-dompurify-sanitize-shows-typeerror-dompurify-webpack-imported-module)
 
 - html-react-parser
   - 게시글 작성시 a tag를 Link로 변환하기 위해 사용
@@ -124,7 +125,8 @@ npm run start
 ![project](./docs/add.gif)
 
 - `React-Quill` 라이브러리를 활용하여 텍스트 에디터 구현
-  - `React-Quill` 관련 라이브러리 Next.js 사용시 `dom is not found` 에러 해결 [참고 링크](https://github.com/zenoamaro/react-quill/issues/910)
+  - `React-Quill` 관련 라이브러리 Next.js 사용시 `dom is not found` 에러 `dynamic import`로 해결 [참고 링크](https://github.com/zenoamaro/react-quill/issues/910)
+  - `dynamic import`시 Layout shift 방지를 위해 스켈레톤 로딩 컴포넌트 표시
 - `useCreatePostMutation`을 활용해 게시물 생성시 react-query `posts` 태그 invalidate하여 최신 게시글 보장
 - `WikiForm` 컴포넌트 생성 후 생성 및 수정에 대해서 재사용이 가능하도록 구현
 
