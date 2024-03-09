@@ -40,7 +40,16 @@ interface ITextEditorProps {
 
 function TextEditor({ value, onChange }: ITextEditorProps) {
   const ReactQuill = useMemo(
-    () => dynamic(() => import('react-quill'), { ssr: false }),
+    () =>
+      dynamic(() => import('react-quill'), {
+        ssr: false,
+        loading: () => (
+          <div
+            style={{ height: '480px' }}
+            className="w-full bg-gray-100 rounded"
+          />
+        ),
+      }),
     [],
   );
   return (
