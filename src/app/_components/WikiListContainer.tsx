@@ -2,20 +2,12 @@
 
 import { useSearchParams } from 'next/navigation';
 import PageNation from './PageNation';
-import { useQuery } from '@tanstack/react-query';
-import { IPostResponse } from '@/model/Post';
-import { getPosts } from '../_lib/getPosts';
 import Wiki from './Wiki';
+import { useGetPostsQuery } from '@/hooks/useGetPostsQuery';
 
-function WikiListSection() {
+function WikiListContainer() {
   const searchParams = useSearchParams();
-  const page = searchParams.get('page') || '1';
-  const { data } = useQuery<IPostResponse>({
-    queryKey: ['posts', 'page', page],
-    queryFn: () => getPosts(page),
-    staleTime: 60 * 1000,
-    gcTime: 300 * 1000,
-  });
+  const { data } = useGetPostsQuery(searchParams.get('page') || '1');
 
   return (
     <main className="flex flex-col items-center gap-6">
@@ -29,4 +21,4 @@ function WikiListSection() {
   );
 }
 
-export default WikiListSection;
+export default WikiListContainer;
