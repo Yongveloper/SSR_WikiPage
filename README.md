@@ -116,8 +116,8 @@ npm run start
 - `generateMetadata`를 활용해 동적으로 metadata 설정
 - 게시글 조회 시 '게시글 전체 제목' API를 호출하여 현재 내용에 포함되는 제목이 있는지 판별
 - html tag 형태로 content를 받기 때문에 리액트 요소 형태로 변환 하여 표시
-  - html-react-parser 라이브러리 XSS 관련 서치 [참고 링크](https://github.com/remarkablemark/html-react-parser/issues/94)
-  - html-react-parser 라이브러리 타입 관련 서치 [참고 링크](https://gist.github.com/natterstefan/3bc712eca6ff88781d687b7240a78cc1)
+  - `html-react-parser` 라이브러리 XSS 관련 서치 [참고 링크](https://github.com/remarkablemark/html-react-parser/issues/94)
+  - `html-react-parser` 라이브러리 타입 관련 서치 [참고 링크](https://gist.github.com/natterstefan/3bc712eca6ff88781d687b7240a78cc1)
 
 ### 3. 게시물 생성
 
