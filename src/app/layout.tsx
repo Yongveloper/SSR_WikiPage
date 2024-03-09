@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <MSWComponent />
         <RQProvider>
-          <div className="w-full max-w-xl h-full min-h-screen flex justify-center mx-auto px-4 pt-32">
+          <div className="w-full max-w-xl h-full min-h-screen flex justify-center mx-auto px-4 py-32">
             {children}
           </div>
         </RQProvider>
