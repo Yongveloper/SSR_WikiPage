@@ -1,9 +1,9 @@
 import { getPost } from '@/app/wiki/[id]/_lib/getPost';
 import { IPost } from '@/model/Post';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useGetPostDetailQuery = (id: string) => {
-  const { data, isLoading, isError } = useQuery<IPost>({
+  const { data, isLoading, isError } = useSuspenseQuery<IPost>({
     queryKey: ['post', 'detail', id],
     queryFn: () => getPost(id as string),
     staleTime: 60 * 1000,
