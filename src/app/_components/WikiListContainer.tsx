@@ -4,10 +4,17 @@ import { useSearchParams } from 'next/navigation';
 import PageNation from './PageNation';
 import Wiki from './Wiki';
 import { useGetPostsQuery } from '@/hooks/useGetPostsQuery';
+import Spinner from '@/components/Spinner';
+import Error from '@/components/Error';
 
 function WikiListContainer() {
   const searchParams = useSearchParams();
-  const { data } = useGetPostsQuery(searchParams.get('page') || '1');
+  const { data, isLoading, isError } = useGetPostsQuery(
+    searchParams.get('page') || '1',
+  );
+
+  if (isLoading) return <Spinner />;
+  if (isError) return <Error />;
 
   return (
     <main className="flex flex-col items-center gap-6">

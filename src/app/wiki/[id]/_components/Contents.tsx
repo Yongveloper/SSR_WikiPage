@@ -6,13 +6,26 @@ import { useGetPostDetailQuery } from '@/hooks/useGetPostDetailQuery';
 import { useGetTitlesQuery } from '@/hooks/useGetTitlesQuery';
 import parse, { DOMNode, Element, domToReact } from 'html-react-parser';
 import Link from 'next/link';
+import Spinner from '@/components/Spinner';
+import Error from '@/components/Error';
 
 function Contents() {
   const params = useParams();
   const { id } = params;
-  const { data: post } = useGetPostDetailQuery(id as string);
-  const { data: titles } = useGetTitlesQuery();
+  const {
+    data: post,
+    isLoading: isPostLoading,
+    isError: isPostError,
+  } = useGetPostDetailQuery(id as string);
+  const {
+    data: titles,
+    isLoading: isTitlesLoading,
+    isError: isTitlesError,
+  } = useGetTitlesQuery();
   let content = post?.content;
+
+  if (isPostLoading || isTitlesLoading) return <Spinner />;
+  if (isPostError || isTitlesError) return <Error />;
 
   const replaceAnchorToLink = (domNode: DOMNode) => {
     const typedDomNode = domNode as Element;
