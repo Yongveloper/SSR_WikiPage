@@ -61,7 +61,7 @@ function WikiForm({
         className="text-2xl font-bold border-b border-gray-200 outline-0"
       />
       <TextEditor value={content} onChange={setContent} />
-      <Button type="submit" className="mt-12 text-lg font-bold">
+      <Button type="submit" className="mt-16 text-lg font-bold">
         저장
       </Button>
     </form>
