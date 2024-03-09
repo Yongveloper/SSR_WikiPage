@@ -9,10 +9,27 @@ import { getTitles } from './_lib/getTitles';
 import Contents from './_components/Contents';
 import Link from 'next/link';
 import Button from '@/components/Button';
+import { Metadata } from 'next';
 
 interface IWikiProps {
   params: {
     id: string;
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: IWikiProps): Promise<Metadata> {
+  const { id } = params;
+  const post = await getPost(id);
+
+  const stripHtmlTags = (html: string) => {
+    return html.replace(/<[^>]*>?/gm, '');
+  };
+
+  return {
+    title: `코딩허브 | ${post.title}`,
+    description: stripHtmlTags(post.content),
   };
 }
 
