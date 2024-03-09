@@ -7,15 +7,10 @@ import { useGetTitlesQuery } from '@/hooks/useGetTitlesQuery';
 import parse, { DOMNode, Element, domToReact } from 'html-react-parser';
 import Link from 'next/link';
 
-// Todo: loading, error 처리
 function Contents() {
   const params = useParams();
   const { id } = params;
-  const {
-    data: post,
-    isLoading,
-    isError,
-  } = useGetPostDetailQuery(id as string);
+  const { data: post } = useGetPostDetailQuery(id as string);
   const { data: titles } = useGetTitlesQuery();
   let content = post?.content;
 
